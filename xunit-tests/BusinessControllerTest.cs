@@ -14,7 +14,8 @@ namespace xunit_tests
         private readonly BusinessController _businessContorller;
         public BusinessControllerTest()
         {
-            _businessContorller = new BusinessController();
+            FakeContext f = new FakeContext();
+            _businessContorller = new BusinessController(f);
         }
         [Fact]
         public void GetBusinessList_Ok()
@@ -26,41 +27,18 @@ namespace xunit_tests
             //Assert
             Assert.IsType<List<Business>>(result);
         }
-        //[Fact]
-        //public void GetBusinessByID_notFound()
-        //{
-        //    //Act
-        //    var id = "1";
-        //    //var controller = new UsersController();
-        //    var result = _businessContorller.Get(id);
-
-        //    //Assert
-        //    Assert.IsType<null>(result);
-        //}
-
-        //[Fact]//עדין לא יכולה לבדוק אותה מכיון שהרשימה ריקה
-        //public void GetBusinessByID_ok()
-        //{
-        //    //Act
-        //    var id = "1";
-        //    //var controller = new UsersController();
-        //    var result = _businessContorller.Get(id);
-
-        //    //Assert
-        //    Assert.IsType<Business>(result);
-        //}
 
         [Fact]
         public void GetByID_ReturnsOk()
         {
             //Arrange
-            var id = "123";
+            var id = "-1";
 
             //Act
-            var result = _businessContorller.Get(id);
+            var result = _businessContorller.GetById(id);
 
             //Assert
-            Assert.IsType<Business>(result);
+            Assert.IsType<OkObjectResult>(result);
         }
         [Fact]
         public void GetByID_Returnsnull()
@@ -69,10 +47,25 @@ namespace xunit_tests
             var id = "2";
 
             //Act
-            var result = _businessContorller.Get(id);
+            var result = _businessContorller.GetById(id);
 
             //Assert
-            Assert.Null(result);
+            Assert.IsType<NotFoundObjectResult>(result);
+        }
+        [Fact]
+        public void PostANewBusinessOK()
+        {
+            var bu = new Business("ccc","rrrr","00000000","-2",true,new List<string>());
+            var result = _businessContorller.PostNewBusiness(bu);
+            Assert.IsType<OkObjectResult>(result);
+        }
+
+        [Fact]
+        public void PostANewBusinessAlreadyExist()
+        {
+            var bu = new Business("fakeBname", "fakeBadrss", "fakeBphone", "-1", true, new List<string>());
+            var result = _businessContorller.PostNewBusiness(bu);
+            Assert.IsType<NotFoundObjectResult>(result);
         }
 
     }

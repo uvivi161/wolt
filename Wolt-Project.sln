@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wolt-Project", "Wolt-Project\Wolt-Project.csproj", "{CA36D485-A71C-4883-B381-6268796D6ED2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xunit-tests", "xunit-tests\xunit-tests.csproj", "{0ACF7406-C5E2-4A00-9B7D-1E2586F6C4A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xunit-tests", "xunit-tests\xunit-tests.csproj", "{0ACF7406-C5E2-4A00-9B7D-1E2586F6C4A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
